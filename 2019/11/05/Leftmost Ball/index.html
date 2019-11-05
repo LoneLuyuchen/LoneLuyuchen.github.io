@@ -13,13 +13,11 @@
     
 
     
-        <meta name="description" content="Leftmost Ball
-题目大意：
-有$n*m$个球，$n$种颜色，每种颜色有$m$个。
+        <meta name="description" content="Leftmost Ball题目大意：有$n*m$个球，$n$种颜色，每种颜色有$m$个。
 现在将其排列，并将每种颜色出现的第一个球的颜色全部改为颜色$0$
 问最后这样的序列有多少个。
-解题思路：
-我们可以考虑按照颜色一个一个加进去，并规定第一个出现的是颜色1，第二个是颜色2,...然后就可以计算"/>
+解题思路：我们可以考虑按照颜色一个一个加进去，并规定第一个出现的是颜色1，第二个是颜色2,…然后就可以计算了。
+用$"/>
     
 
     <!--Author-->
@@ -34,13 +32,11 @@
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="Leftmost Ball
-题目大意：
-有$n*m$个球，$n$种颜色，每种颜色有$m$个。
+        <meta property="og:description" content="Leftmost Ball题目大意：有$n*m$个球，$n$种颜色，每种颜色有$m$个。
 现在将其排列，并将每种颜色出现的第一个球的颜色全部改为颜色$0$
 问最后这样的序列有多少个。
-解题思路：
-我们可以考虑按照颜色一个一个加进去，并规定第一个出现的是颜色1，第二个是颜色2,...然后就可以计算"/>
+解题思路：我们可以考虑按照颜色一个一个加进去，并规定第一个出现的是颜色1，第二个是颜色2,…然后就可以计算了。
+用$"/>
     
 
     <!--Open Graph Site Name-->
@@ -206,20 +202,15 @@
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <hr>
-<h2>Leftmost Ball</h2>
-<h2>题目大意：</h2>
-<p>有$n*m$个球，$n$种颜色，每种颜色有$m$个。</p>
+<h2 id="Leftmost-Ball"><a href="#Leftmost-Ball" class="headerlink" title="Leftmost Ball"></a>Leftmost Ball</h2><h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>有$n*m$个球，$n$种颜色，每种颜色有$m$个。</p>
 <p>现在将其排列，并将每种颜色出现的第一个球的颜色全部改为颜色$0$</p>
 <p>问最后这样的序列有多少个。</p>
-<h2>解题思路：</h2>
-<p>我们可以考虑按照颜色一个一个加进去，并规定第一个出现的是颜色1，第二个是颜色2,...然后就可以计算了。</p>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>我们可以考虑按照颜色一个一个加进去，并规定第一个出现的是颜色1，第二个是颜色2,…然后就可以计算了。</p>
 <p>用$dp_{i,j}$表示加到颜色$i$，并且最开头有$j$个颜色为$0$</p>
 <p>那么$dp_{i,j}=\sum_{k&gt;=j-1}C_{mi-j-1}^{m-2}$</p>
 <p>然后发现后面那个组合数和k无关，拎出来，前缀和一下即可。</p>
 <p>神仙Dp</p>
-<h1>Code：</h1>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">int</span> f[<span class="number">2010</span>][<span class="number">2010</span>],fac[<span class="number">4000100</span>],inv[<span class="number">4000100</span>],n,k;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">quickpow</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(y==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(y%<span class="number">2</span>==<span class="number">0</span>)<span class="keyword">return</span> quickpow(x*x%mod,y/<span class="number">2</span>);</span><br><span class="line">	<span class="keyword">if</span>(y%<span class="number">2</span>==<span class="number">1</span>)<span class="keyword">return</span> quickpow(x*x%mod,y/<span class="number">2</span>)*x%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;y||y&lt;<span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(x==y||y==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> fac[x]*inv[y]%mod*inv[x-y]%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;k);</span><br><span class="line">	<span class="keyword">if</span>(k==<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">"1"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n*k;i++)</span><br><span class="line">		fac[i]=fac[i<span class="number">-1</span>]*i%mod;</span><br><span class="line">	inv[n*k]=quickpow(fac[n*k],mod<span class="number">-2</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n*k<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">		inv[i]=inv[i+<span class="number">1</span>]*(i+<span class="number">1</span>)%mod;</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(j)(f[i][j]+=f[i<span class="number">-1</span>][j<span class="number">-1</span>]*C(k*i-j<span class="number">-1</span>,k<span class="number">-2</span>)%mod)%=mod;</span><br><span class="line">            f[i][j]=(f[i][j]+f[i][j+<span class="number">1</span>])%mod;	</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,fac[n]*f[n][<span class="number">0</span>]%mod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
+<h1 id="Code："><a href="#Code：" class="headerlink" title="Code："></a>Code：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">int</span> f[<span class="number">2010</span>][<span class="number">2010</span>],fac[<span class="number">4000100</span>],inv[<span class="number">4000100</span>],n,k;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">quickpow</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(y==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(y%<span class="number">2</span>==<span class="number">0</span>)<span class="keyword">return</span> quickpow(x*x%mod,y/<span class="number">2</span>);</span><br><span class="line">	<span class="keyword">if</span>(y%<span class="number">2</span>==<span class="number">1</span>)<span class="keyword">return</span> quickpow(x*x%mod,y/<span class="number">2</span>)*x%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x&lt;y||y&lt;<span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(x==y||y==<span class="number">0</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">return</span> fac[x]*inv[y]%mod*inv[x-y]%mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;k);</span><br><span class="line">	<span class="keyword">if</span>(k==<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">"1"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n*k;i++)</span><br><span class="line">		fac[i]=fac[i<span class="number">-1</span>]*i%mod;</span><br><span class="line">	inv[n*k]=quickpow(fac[n*k],mod<span class="number">-2</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n*k<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">		inv[i]=inv[i+<span class="number">1</span>]*(i+<span class="number">1</span>)%mod;</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(j)(f[i][j]+=f[i<span class="number">-1</span>][j<span class="number">-1</span>]*C(k*i-j<span class="number">-1</span>,k<span class="number">-2</span>)%mod)%=mod;</span><br><span class="line">            f[i][j]=(f[i][j]+f[i][j+<span class="number">1</span>])%mod;	</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,fac[n]*f[n][<span class="number">0</span>]%mod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
                 
             </div>
@@ -290,22 +281,6 @@
 
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>
