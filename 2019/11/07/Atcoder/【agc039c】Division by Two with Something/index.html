@@ -13,7 +13,9 @@
     
 
     
-        <meta name="description" content="题目大意：在平面上找$N$个点，使得任意两个点之间的距离不为$\sqrt {dis1}$或者$\sqrt {dis2}$"/>
+        <meta name="description" content="题目大意：对于一个长度为$N$的$01$串，一次操作为去掉最后一个字符，并取反放到最前面
+给出一个长度为$N$的$01$串，问所有二进制数小于这个数的$01$串经过多少次操作能还原
+解题思路：找规律可发现，对于这个串，可以将它分成奇数个节，每个节为一个任意的$01$串，并且相邻的两个$01$串分别互"/>
     
 
     <!--Author-->
@@ -23,12 +25,14 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="【agc025d】Choosing Points"/>
+        <meta property="og:title" content="【agc039c】Division by Two with Something.md"/>
     
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="题目大意：在平面上找$N$个点，使得任意两个点之间的距离不为$\sqrt {dis1}$或者$\sqrt {dis2}$"/>
+        <meta property="og:description" content="题目大意：对于一个长度为$N$的$01$串，一次操作为去掉最后一个字符，并取反放到最前面
+给出一个长度为$N$的$01$串，问所有二进制数小于这个数的$01$串经过多少次操作能还原
+解题思路：找规律可发现，对于这个串，可以将它分成奇数个节，每个节为一个任意的$01$串，并且相邻的两个$01$串分别互"/>
     
 
     <!--Open Graph Site Name-->
@@ -55,7 +59,7 @@
 
     <!-- Title -->
     
-    <title>【agc025d】Choosing Points - LoneLuyuchen</title>
+    <title>【agc039c】Division by Two with Something.md - LoneLuyuchen</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -165,13 +169,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>【agc025d】Choosing Points</h1>
+                    <h1>【agc039c】Division by Two with Something.md</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
                         
-                            2019-11-06
+                            2019-11-07
                         
                     </span>
                 </div>
@@ -191,7 +195,7 @@
                     
                         
 
-<a href="/categories/构造/">构造</a>
+<a href="/categories/数论/">数论</a>
 
                     
                 </div>
@@ -205,21 +209,11 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>在平面上找$N$个点，使得任意两个点之间的距离不为$\sqrt {dis1}$或者$\sqrt {dis2}$</p>
-<a id="more"></a>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><ul>
-<li><p>$1、$如果$dis$除以$4$余$1$，那么一定是一个奇数一个偶数，那么黑白染色即可。</p>
-</li>
-<li><p>$2、$如果$dis$除以$4$余$2$，那么一定是两个奇数，分行染色即可。</p>
-</li>
-<li><p>$3、$如果$dis$除以$4$余$3$，扯淡吧</p>
-</li>
-<li><p>$4、$如果$dis$除以$4$余$0$，那么可以都除以$2$转化成前两种情况。</p>
-</li>
-</ul>
-<p>最后剩下的白色格子至少有$N^2$个</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code:"></a>Code:</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">bool</span> vis[<span class="number">1010</span>][<span class="number">1010</span>];</span><br><span class="line"><span class="keyword">int</span> n,dis1,dis2,tot;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(x%<span class="number">4</span>==<span class="number">0</span>)t++,x/=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">if</span>(x%<span class="number">4</span>==<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n*<span class="number">2</span>;i++) </span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n*<span class="number">2</span>;j++)</span><br><span class="line">			vis[i][j]|=(i^j)&gt;&gt;t&amp;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n*<span class="number">2</span>;i++) </span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n*<span class="number">2</span>;j++)</span><br><span class="line">			vis[i][j]|=i&gt;&gt;t&amp;<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;dis1,&amp;dis2);</span><br><span class="line">	init(dis1),init(dis2);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>*n;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">2</span>*n;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!vis[i][j])<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,i,j),tot++;</span><br><span class="line">			<span class="keyword">if</span>(tot==n*n)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+                <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>对于一个长度为$N$的$01$串，一次操作为去掉最后一个字符，并取反放到最前面</p>
+<p>给出一个长度为$N$的$01$串，问所有二进制数小于这个数的$01$串经过多少次操作能还原</p>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>找规律可发现，对于这个串，可以将它分成奇数个节，每个节为一个任意的$01$串，并且相邻的两个$01$串分别互相相反。这样的答案为$2len$($len$为每个节的长度)。</p>
+<p>枚举这样的节的个数，并判断有多少个满足要求。</p>
+<h1 id="Code："><a href="#Code：" class="headerlink" title="Code："></a>Code：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 998244353</span></span><br><span class="line"><span class="keyword">int</span> n,ans,a[<span class="number">300100</span>],p[<span class="number">300100</span>],cnt,sum[<span class="number">300100</span>];</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">300100</span>];</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,s);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		a[i]=s[i]-<span class="string">'0'</span>;</span><br><span class="line">	p[++cnt]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;=n;i+=<span class="number">2</span>)</span><br><span class="line">		<span class="keyword">if</span>(n%i==<span class="number">0</span>)p[++cnt]=i;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=cnt;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">int</span> len=n/p[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;len;j++)</span><br><span class="line">			sum[i]=(sum[i]*<span class="number">2</span>+a[j])%mod;</span><br><span class="line">		sum[i]++;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">			<span class="keyword">if</span>(((a[j%len])^(j/len&amp;<span class="number">1</span>))&lt;a[j])<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(((a[j%len])^(j/len&amp;<span class="number">1</span>))&gt;a[j])&#123;</span><br><span class="line">					--sum[i];</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=cnt;j++)</span><br><span class="line">			<span class="keyword">if</span>(p[j]%p[i]==<span class="number">0</span>)(sum[i]-=sum[j]-mod)%=mod;</span><br><span class="line">		(ans+=sum[i]*n/p[i]*<span class="number">2</span>%mod)%=mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans%mod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
                 
             </div>

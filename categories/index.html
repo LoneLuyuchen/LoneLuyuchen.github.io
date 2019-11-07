@@ -174,14 +174,6 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
                     <div class="post-preview">
-    <a href="/categories/构造/">
-        <h1 class="post-title archive">
-            构造
-        </h1>
-    </a>
-</div>
-                
-                    <div class="post-preview">
     <a href="/categories/动态规划/">
         <h1 class="post-title archive">
             动态规划
@@ -190,9 +182,9 @@
 </div>
                 
                     <div class="post-preview">
-    <a href="/categories/前缀和/">
+    <a href="/categories/构造/">
         <h1 class="post-title archive">
-            前缀和
+            构造
         </h1>
     </a>
 </div>
@@ -201,6 +193,14 @@
     <a href="/categories/数论/">
         <h1 class="post-title archive">
             数论
+        </h1>
+    </a>
+</div>
+                
+                    <div class="post-preview">
+    <a href="/categories/前缀和/">
+        <h1 class="post-title archive">
+            前缀和
         </h1>
     </a>
 </div>
@@ -269,6 +269,22 @@
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 
 </html>
