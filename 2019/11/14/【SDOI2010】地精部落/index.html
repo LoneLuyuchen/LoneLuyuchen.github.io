@@ -13,6 +13,12 @@
     
 
     
+        <meta name="description" content="题目大意： 求满足以下条件的$n$排列$p_n$的个数
+对于任意$i\in(1,n)$，$(p_n-p_{n-1})(p_n-p_{n+1})&amp;gt;0$
+解题思路：首先我们会发现，第一个数是峰的方案数与第一个数是谷的方案数是一样的。
+我们用$dp_{i}$表示$i$排列中第一个数是峰的方案数。
+那"/>
+    
 
     <!--Author-->
     
@@ -21,10 +27,16 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="LoneLuyuchen"/>
+        <meta property="og:title" content="【SDOI2010】地精部落"/>
     
 
     <!--Open Graph Description-->
+    
+        <meta property="og:description" content="题目大意： 求满足以下条件的$n$排列$p_n$的个数
+对于任意$i\in(1,n)$，$(p_n-p_{n-1})(p_n-p_{n+1})&amp;gt;0$
+解题思路：首先我们会发现，第一个数是峰的方案数与第一个数是谷的方案数是一样的。
+我们用$dp_{i}$表示$i$排列中第一个数是峰的方案数。
+那"/>
     
 
     <!--Open Graph Site Name-->
@@ -32,7 +44,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website"/>
+        <meta property="og:type" content="article"/>
     
 
     <!--Page Cover-->
@@ -51,7 +63,7 @@
 
     <!-- Title -->
     
-    <title>page - Archives - LoneLuyuchen</title>
+    <title>【SDOI2010】地精部落 - LoneLuyuchen</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -153,170 +165,77 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('/img/wallhaven-p28863_3840x1600.png')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>Archives</h1>
+                <div class="post-heading">
+                    <h1>【SDOI2010】地精部落</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2019-11-14
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+<a href="/categories/动态规划/">动态规划</a>
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
             
-                <div class="post-preview">
-    <a href="/2019/11/14/下大雨/">
-        <h1 class="post-title archive">
-            下大雨
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2019-11-14
-    </p>
-</div>
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2019/11/14/接龙红包/">
-        <h1 class="post-title archive">
-            接龙红包
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2019-11-14
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p> 求满足以下条件的$n$排列$p_n$的个数</p>
+<p>对于任意$i\in(1,n)$，$(p_n-p_{n-1})(p_n-p_{n+1})&gt;0$</p>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>首先我们会发现，第一个数是峰的方案数与第一个数是谷的方案数是一样的。</p>
+<p>我们用$dp_{i}$表示$i$排列中第一个数是峰的方案数。</p>
+<p>那么$dp_i=dp_j<em>dp_{i-1-j}</em>C_{i-1}^{j}$</p>
+<p>答案就是$2f_n$</p>
+<h1 id="Code："><a href="#Code：" class="headerlink" title="Code："></a>Code：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">int</span> n,mod,C[<span class="number">2</span>][<span class="number">5010</span>],f[<span class="number">5010</span>];</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;mod);</span><br><span class="line">	f[<span class="number">1</span>]=f[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	C[<span class="number">0</span>][<span class="number">0</span>]=C[<span class="number">1</span>][<span class="number">0</span>]=C[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		C[i%<span class="number">2</span>][<span class="number">0</span>]=C[i%<span class="number">2</span>][i]=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;i;j++)C[i%<span class="number">2</span>][j]=(C[<span class="number">1</span>-i%<span class="number">2</span>][j<span class="number">-1</span>]+C[<span class="number">1</span>-i%<span class="number">2</span>][j])%mod;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;i;j++)</span><br><span class="line">			<span class="keyword">if</span>(j%<span class="number">2</span>==<span class="number">1</span>)(f[i]+=f[j]*f[i<span class="number">-1</span>-j]%mod*C[<span class="number">1</span>-i%<span class="number">2</span>][j]%mod)%=mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,f[n]*<span class="number">2</span>%mod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2019/11/14/蜥蜴/">
-        <h1 class="post-title archive">
-            蜥蜴
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2019-11-14
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2019/11/14/降雨量/">
-        <h1 class="post-title archive">
-            降雨量
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2019-11-14
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2019/11/14/【Codeforces536D】Tavas in Kansas/">
-        <h1 class="post-title archive">
-            【Codeforces536D】Tavas in Kansas
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2019-11-14
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2019/11/14/【Codeforces13C】Sequence/">
-        <h1 class="post-title archive">
-            【Codeforces13C】Sequence
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2019-11-14
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2019/11/14/【arc103c】Robot Arms/">
-        <h1 class="post-title archive">
-            【arc103c】Robot Arms
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2019-11-14
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2019/11/14/【arc064f】Rotated Palindromes/">
-        <h1 class="post-title archive">
-            【arc064f】Rotated Palindromes
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2019-11-14
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2019/11/14/【agc039c】Division by Two with Something/">
-        <h1 class="post-title archive">
-            【agc039c】Division by Two with Something
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2019-11-14
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2019/11/14/【agc036e】ABC String/">
-        <h1 class="post-title archive">
-            【agc036e】ABC String
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2019-11-14
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-        <li class="previous"><a href="/archives/">&larr;  Newer Posts</a></li>
-    
-    
-        <li class="next"><a href="/archives/page/3/">Older Posts  &rarr;</a></li>
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr />

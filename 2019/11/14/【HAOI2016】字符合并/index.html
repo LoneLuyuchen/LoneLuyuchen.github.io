@@ -13,7 +13,11 @@
     
 
     
-        <meta name="description" content="题目大意：在平面上找$N$个点，使得任意两个点之间的距离不为$\sqrt {dis1}$或者$\sqrt {dis2}$"/>
+        <meta name="description" content="题目大意：给出一个$01$串，每次可以选取一个长度为$K$子串，换成一个指定的字符，并有一定的收益。
+问最大的收益。
+解题思路：首先我们发现一定要缩得不能缩为止最优。
+我们用$dp_{i,j,t}$表示$[i,j]$中的子串最终变为$t$的最大收益。
+我们枚举那个分界点mid，然后分成两段收益加起来"/>
     
 
     <!--Author-->
@@ -23,12 +27,16 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="【agc025d】Choosing Points"/>
+        <meta property="og:title" content="【HAOI2016】字符合并"/>
     
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="题目大意：在平面上找$N$个点，使得任意两个点之间的距离不为$\sqrt {dis1}$或者$\sqrt {dis2}$"/>
+        <meta property="og:description" content="题目大意：给出一个$01$串，每次可以选取一个长度为$K$子串，换成一个指定的字符，并有一定的收益。
+问最大的收益。
+解题思路：首先我们发现一定要缩得不能缩为止最优。
+我们用$dp_{i,j,t}$表示$[i,j]$中的子串最终变为$t$的最大收益。
+我们枚举那个分界点mid，然后分成两段收益加起来"/>
     
 
     <!--Open Graph Site Name-->
@@ -55,7 +63,7 @@
 
     <!-- Title -->
     
-    <title>【agc025d】Choosing Points - LoneLuyuchen</title>
+    <title>【HAOI2016】字符合并 - LoneLuyuchen</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -165,7 +173,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>【agc025d】Choosing Points</h1>
+                    <h1>【HAOI2016】字符合并</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
@@ -191,7 +199,7 @@
                     
                         
 
-<a href="/categories/构造/">构造</a>
+<a href="/categories/动态规划/">动态规划</a>
 
                     
                 </div>
@@ -205,20 +213,13 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>在平面上找$N$个点，使得任意两个点之间的距离不为$\sqrt {dis1}$或者$\sqrt {dis2}$</p>
-<a id="more"></a>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><ul>
-<li><p>$1、$如果$dis$除以$4$余$1$，那么一定是一个奇数一个偶数，那么黑白染色即可。</p>
-</li>
-<li><p>$2、$如果$dis$除以$4$余$2$，那么一定是两个奇数，分行染色即可。</p>
-</li>
-<li><p>$3、$如果$dis$除以$4$余$3$，扯淡吧</p>
-</li>
-<li><p>$4、$如果$dis$除以$4$余$0$，那么可以都除以$2$转化成前两种情况。</p>
-</li>
-</ul>
-<p>最后剩下的白色格子至少有$N^2$个</p>
-<h1 id="Code"><a href="#Code" class="headerlink" title="Code:"></a>Code:</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">bool</span> vis[<span class="number">1010</span>][<span class="number">1010</span>];</span><br><span class="line"><span class="keyword">int</span> n,dis1,dis2,tot;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(x%<span class="number">4</span>==<span class="number">0</span>)t++,x/=<span class="number">4</span>;</span><br><span class="line">	<span class="keyword">if</span>(x%<span class="number">4</span>==<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n*<span class="number">2</span>;i++) </span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n*<span class="number">2</span>;j++)</span><br><span class="line">			vis[i][j]|=(i^j)&gt;&gt;t&amp;<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n*<span class="number">2</span>;i++) </span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n*<span class="number">2</span>;j++)</span><br><span class="line">			vis[i][j]|=i&gt;&gt;t&amp;<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;n,&amp;dis1,&amp;dis2);</span><br><span class="line">	init(dis1),init(dis2);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">2</span>*n;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">2</span>*n;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(!vis[i][j])<span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>,i,j),tot++;</span><br><span class="line">			<span class="keyword">if</span>(tot==n*n)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>给出一个$01$串，每次可以选取一个长度为$K$子串，换成一个指定的字符，并有一定的收益。</p>
+<p>问最大的收益。</p>
+<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>首先我们发现一定要缩得不能缩为止最优。</p>
+<p>我们用$dp_{i,j,t}$表示$[i,j]$中的子串最终变为$t$的最大收益。</p>
+<p>我们枚举那个分界点mid，然后分成两段收益加起来的最大值。</p>
+<p>注意如果$[i,j]$之间分开再合拢能够继续操作那就再操作即可。</p>
+<h1 id="Code："><a href="#Code：" class="headerlink" title="Code："></a>Code：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::max;</span><br><span class="line"><span class="keyword">int</span> n,k,a[<span class="number">310</span>],b[<span class="number">610</span>],c[<span class="number">610</span>];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> f[<span class="number">310</span>][<span class="number">310</span>][<span class="number">310</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;k);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;k);i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;b[i],&amp;c[i]);</span><br><span class="line">	<span class="built_in">memset</span>(f,<span class="number">-0x3f</span>,<span class="keyword">sizeof</span>(f));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)f[i][i][a[i]]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> len=<span class="number">2</span>;len&lt;=n;len++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,j=len;j&lt;=n;i++,j++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> mid=j;mid&gt;=i;mid-=k<span class="number">-1</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span>((len<span class="number">-1</span>)%(k<span class="number">-1</span>)==<span class="number">0</span>)</span><br><span class="line">					<span class="keyword">for</span>(<span class="keyword">int</span> K=<span class="number">0</span>;K&lt;(<span class="number">1</span>&lt;&lt;k);K++)&#123;</span><br><span class="line">						f[i][j][b[<span class="number">2</span>*K]]=max(f[i][j][b[<span class="number">2</span>*K]],f[i][mid<span class="number">-1</span>][K]+f[mid][j][<span class="number">0</span>]+c[<span class="number">2</span>*K]);</span><br><span class="line">						f[i][j][b[<span class="number">2</span>*K+<span class="number">1</span>]]=max(f[i][j][b[<span class="number">2</span>*K+<span class="number">1</span>]],f[i][mid<span class="number">-1</span>][K]+f[mid][j][<span class="number">1</span>]+c[<span class="number">2</span>*K+<span class="number">1</span>]);</span><br><span class="line">					&#125;					</span><br><span class="line">				<span class="keyword">else</span> <span class="keyword">for</span>(<span class="keyword">int</span> K=<span class="number">0</span>;K&lt;(<span class="number">1</span>&lt;&lt;k<span class="number">-1</span>);K++)&#123;</span><br><span class="line">					f[i][j][<span class="number">2</span>*K]=max(f[i][j][<span class="number">2</span>*K],f[i][mid<span class="number">-1</span>][K]+f[mid][j][<span class="number">0</span>]);</span><br><span class="line">					f[i][j][<span class="number">2</span>*K+<span class="number">1</span>]=max(f[i][j][<span class="number">2</span>*K+<span class="number">1</span>],f[i][mid<span class="number">-1</span>][K]+f[mid][j][<span class="number">1</span>]);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> ans=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;k);i++)</span><br><span class="line">		ans=max(ans,f[<span class="number">1</span>][n][i]);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
                 
