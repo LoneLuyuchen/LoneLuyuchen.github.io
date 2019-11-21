@@ -14,11 +14,11 @@
 
     
         <meta name="description" content="题目大意：
-现在要从字符串$A$中取出$k$个互不重叠的非空子串，
-然后把这$k$照其在字符串$A$中出现的顺序依次连接起来得到一个新的字符串。
-请问有多少种方案可以使得这个新串与字符串$B$相等？
+现在有一有根树，每个点的权值为0或1，每条边的连向是从其父亲连到自己。
+求其最小的拓扑序使得权值序列的逆序对个数尽量少。求这个最小值
 解题思路：
-我们用动态规划，$dp_{i,j,k,0/1}$表示字符串$A$的前$i$个，字符串$B"/>
+我们考虑两个拓扑序拼在一起怎样才能使得最终拓扑序逆序对个数最少。
+令$x_{0/1}$为第一个序列的$0/1$的个数，$y_{0/1}$为第二"/>
     
 
     <!--Author-->
@@ -28,17 +28,17 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="【NOIP2015】子串"/>
+        <meta property="og:title" content="【agc023f】01 on Tree"/>
     
 
     <!--Open Graph Description-->
     
         <meta property="og:description" content="题目大意：
-现在要从字符串$A$中取出$k$个互不重叠的非空子串，
-然后把这$k$照其在字符串$A$中出现的顺序依次连接起来得到一个新的字符串。
-请问有多少种方案可以使得这个新串与字符串$B$相等？
+现在有一有根树，每个点的权值为0或1，每条边的连向是从其父亲连到自己。
+求其最小的拓扑序使得权值序列的逆序对个数尽量少。求这个最小值
 解题思路：
-我们用动态规划，$dp_{i,j,k,0/1}$表示字符串$A$的前$i$个，字符串$B"/>
+我们考虑两个拓扑序拼在一起怎样才能使得最终拓扑序逆序对个数最少。
+令$x_{0/1}$为第一个序列的$0/1$的个数，$y_{0/1}$为第二"/>
     
 
     <!--Open Graph Site Name-->
@@ -65,7 +65,7 @@
 
     <!-- Title -->
     
-    <title>【NOIP2015】子串 - LoneLuyuchen</title>
+    <title>【agc023f】01 on Tree - LoneLuyuchen</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -175,13 +175,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>【NOIP2015】子串</h1>
+                    <h1>【agc023f】01 on Tree</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
                         
-                            2019-11-14
+                            2019-11-21
                         
                     </span>
                 </div>
@@ -201,7 +201,7 @@
                     
                         
 
-<a href="/categories/动态规划/">动态规划</a>
+<a href="/categories/单调队列/">单调队列</a>
 
                     
                 </div>
@@ -216,17 +216,19 @@
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <h2>题目大意：</h2>
-<p>现在要从字符串$A$中取出$k$个互不重叠的非空子串，</p>
-<p>然后把这$k$照其在字符串$A$中出现的顺序依次连接起来得到一个新的字符串。</p>
-<p>请问有多少种方案可以使得这个新串与字符串$B$相等？</p>
+<p>现在有一有根树，每个点的权值为0或1，每条边的连向是从其父亲连到自己。</p>
+<p>求其最小的拓扑序使得权值序列的逆序对个数尽量少。求这个最小值</p>
 <h2>解题思路：</h2>
-<p>我们用动态规划，$dp_{i,j,k,0/1}$表示字符串$A$的前$i$个，字符串$B$的前$j$个，取出了$k$个串，并且第$i$个取了/没取的方案数。</p>
-<p>如果不取，那我们容易发现$dp_{i,j,k,0}=dp_{i-1,j,k,0}+dp_{i-1,j,k,1}$</p>
-<p>如果要取，我们要分类讨论，如果$A_i=B_j$那$dp_{i,j,k,1}=dp_{i-1,j-1,k-1,0}+dp_{i-1,j-1,k-1,1}+dp_{i-1,j-1,k,1}$</p>
-<p>否则$dp_{i,j,k,1}=0$</p>
-<p>这样我们会发现会$MLE$于是我们考虑滚动数组即可。</p>
+<p>我们考虑两个拓扑序拼在一起怎样才能使得最终拓扑序逆序对个数最少。</p>
+<p>令$x_{0/1}$为第一个序列的$0/1$的个数，$y_{0/1}$为第二个序列的$0/1$的个数。</p>
+<p>如果第一个序列在第二个序列前面更优的话一定会满足式子：</p>
+<p>$x_1y_0\leq x_0y_1$</p>
+<p>即$\frac{x_1}{x_0}\leq \frac{y_1}{y_0}$</p>
+<p>由此可得当1的个数比上0的个数更小的时候，排在前面更优。</p>
+<p>我们考虑用优先队列，找到最小的一个点，与其父亲合并。</p>
+<p>然后搞搞即可。</p>
 <h1>Code：</h1>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="keyword">int</span> n,m,K,dp[<span class="number">2</span>][<span class="number">210</span>][<span class="number">210</span>][<span class="number">2</span>];</span><br><span class="line"><span class="keyword">char</span> A[<span class="number">1010</span>],B[<span class="number">1010</span>];</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld"</span>,&amp;n,&amp;m,&amp;K);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,A+<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,B+<span class="number">1</span>);</span><br><span class="line">	dp[<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>]=dp[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>,x=<span class="number">1</span>;i&lt;=n;i++,x^=<span class="number">1</span>)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=K;k++)&#123;</span><br><span class="line">				dp[x][j][k][<span class="number">0</span>]=(dp[<span class="number">1</span>-x][j][k][<span class="number">0</span>]+dp[<span class="number">1</span>-x][j][k][<span class="number">1</span>])%mod;</span><br><span class="line">				<span class="keyword">if</span>(A[i]==B[j])dp[x][j][k][<span class="number">1</span>]=(dp[<span class="number">1</span>-x][j<span class="number">-1</span>][k<span class="number">-1</span>][<span class="number">0</span>]+dp[<span class="number">1</span>-x][j<span class="number">-1</span>][k<span class="number">-1</span>][<span class="number">1</span>]+dp[<span class="number">1</span>-x][j<span class="number">-1</span>][k][<span class="number">1</span>])%mod;</span><br><span class="line">				<span class="keyword">else</span> dp[x][j][k][<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,(dp[n%<span class="number">2</span>][m][K][<span class="number">1</span>]+dp[n%<span class="number">2</span>][m][K][<span class="number">0</span>])%mod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> C0,C1,id;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(node b)<span class="keyword">const</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> C1*b.C0&gt;C0*b.C1;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;a[<span class="number">300100</span>];</span><br><span class="line"><span class="built_in">std</span>::priority_queue&lt;node&gt;qu;</span><br><span class="line"><span class="keyword">int</span> father[<span class="number">300100</span>],n,p[<span class="number">300100</span>],val[<span class="number">300100</span>],ans;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(father[x]==x)<span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">return</span> father[x]=find(father[x]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;p[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;val[i]);</span><br><span class="line">		<span class="keyword">if</span>(val[i]==<span class="number">1</span>)a[i]=(node)&#123;<span class="number">0</span>,<span class="number">1</span>,i&#125;;</span><br><span class="line">		<span class="keyword">else</span> a[i]=(node)&#123;<span class="number">1</span>,<span class="number">0</span>,i&#125;;</span><br><span class="line">		<span class="keyword">if</span>(i!=<span class="number">1</span>)qu.push(a[i]);</span><br><span class="line">		father[i]=i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(!qu.empty())&#123;</span><br><span class="line">		node x=qu.top();</span><br><span class="line">		<span class="keyword">int</span> now=find(x.id);</span><br><span class="line">		qu.pop();</span><br><span class="line">		<span class="keyword">if</span>(a[now].C0!=x.C0||a[now].C1!=x.C1)<span class="keyword">continue</span>;</span><br><span class="line">		<span class="keyword">int</span> fa=find(p[now]);</span><br><span class="line">		ans+=a[fa].C1*a[now].C0;</span><br><span class="line">		a[fa].C1+=a[now].C1;</span><br><span class="line">		a[fa].C0+=a[now].C0;</span><br><span class="line">		father[find(now)]=father[find(fa)];</span><br><span class="line">		<span class="keyword">if</span>(fa!=<span class="number">1</span>)qu.push(a[fa]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
 
                 
