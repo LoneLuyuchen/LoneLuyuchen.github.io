@@ -13,12 +13,14 @@
     
 
     
-        <meta name="description" content="题目大意：一根数轴上，有一些人要从$S$点出发。要回到各自的家。
+        <meta name="description" content="题目大意：
+一根数轴上，有一些人要从$S$点出发。要回到各自的家。
 有$n$座房子，每座房子在点$x_i$，里面住着$p_i$个人。
 公交车会根据大家的投票结果进行运行，可以投票往左还是往右。
 大家都会尽量让自己回到家的时间最少。
 问公交车需要多少时间才能送完全部乘客。
-解题思路：首先我们考虑最两端的"/>
+解题思路：
+首先我们考虑最两"/>
     
 
     <!--Author-->
@@ -33,12 +35,14 @@
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="题目大意：一根数轴上，有一些人要从$S$点出发。要回到各自的家。
+        <meta property="og:description" content="题目大意：
+一根数轴上，有一些人要从$S$点出发。要回到各自的家。
 有$n$座房子，每座房子在点$x_i$，里面住着$p_i$个人。
 公交车会根据大家的投票结果进行运行，可以投票往左还是往右。
 大家都会尽量让自己回到家的时间最少。
 问公交车需要多少时间才能送完全部乘客。
-解题思路：首先我们考虑最两端的"/>
+解题思路：
+首先我们考虑最两"/>
     
 
     <!--Open Graph Site Name-->
@@ -215,15 +219,19 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>一根数轴上，有一些人要从$S$点出发。要回到各自的家。</p>
+                <h2>题目大意：</h2>
+<p>一根数轴上，有一些人要从$S$点出发。要回到各自的家。</p>
 <p>有$n$座房子，每座房子在点$x_i$，里面住着$p_i$个人。</p>
 <p>公交车会根据大家的投票结果进行运行，可以投票往左还是往右。</p>
 <p>大家都会尽量让自己回到家的时间最少。</p>
 <p>问公交车需要多少时间才能送完全部乘客。</p>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>首先我们考虑最两端的乘客。如果左边人数比右边少，那么最左边的人一定会投票往右：</p>
+<h2>解题思路：</h2>
+<p>首先我们考虑最两端的乘客。如果左边人数比右边少，那么最左边的人一定会投票往右：</p>
 <p>因为即使到最后快到自己家了，由于人数少肯定会又回去，反而变慢了。</p>
 <p>那就把所有左边的人数加到右边，计算对答案的贡献，然后继续操作。</p>
-<h1 id="Code："><a href="#Code：" class="headerlink" title="Code："></a>Code：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">int</span> n,S,x[<span class="number">300100</span>],p[<span class="number">300100</span>],ans;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;S);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;x[i],&amp;p[i]);</span><br><span class="line">	<span class="keyword">int</span> l=<span class="number">1</span>,r=n,dir=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(x[l]&gt;=S)&#123;</span><br><span class="line">			ans+=x[r]-S;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(x[r]&lt;=S)&#123;</span><br><span class="line">			ans+=S-x[l];</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(p[l]&gt;=p[r])&#123;</span><br><span class="line">			<span class="keyword">if</span>(dir!=<span class="number">1</span>)ans+=x[r]-x[l],dir=<span class="number">1</span>;</span><br><span class="line">			p[l]+=p[r];</span><br><span class="line">			r--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(dir!=<span class="number">2</span>)ans+=x[r]-x[l],dir=<span class="number">2</span>;</span><br><span class="line">			p[r]+=p[l];</span><br><span class="line">			l++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>Code：</h1>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">int</span> n,S,x[<span class="number">300100</span>],p[<span class="number">300100</span>],ans;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;S);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;x[i],&amp;p[i]);</span><br><span class="line">	<span class="keyword">int</span> l=<span class="number">1</span>,r=n,dir=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(x[l]&gt;=S)&#123;</span><br><span class="line">			ans+=x[r]-S;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(x[r]&lt;=S)&#123;</span><br><span class="line">			ans+=S-x[l];</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(p[l]&gt;=p[r])&#123;</span><br><span class="line">			<span class="keyword">if</span>(dir!=<span class="number">1</span>)ans+=x[r]-x[l],dir=<span class="number">1</span>;</span><br><span class="line">			p[l]+=p[r];</span><br><span class="line">			r--;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(dir!=<span class="number">2</span>)ans+=x[r]-x[l],dir=<span class="number">2</span>;</span><br><span class="line">			p[r]+=p[l];</span><br><span class="line">			l++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
 
                 
             </div>

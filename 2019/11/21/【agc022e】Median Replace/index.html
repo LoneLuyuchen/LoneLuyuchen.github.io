@@ -13,11 +13,14 @@
     
 
     
-        <meta name="description" content="题目大意：给出一个01串，每次可以把相邻的三个数进行操作，取出其平均数然后再塞回去。
+        <meta name="description" content="题目大意：
+给出一个01串，每次可以把相邻的三个数进行操作，取出其平均数然后再塞回去。
 有些位置01均可填，问有多少种方案使得最终可以变成1
-解题思路：我们考虑建自动机。
+解题思路：
+我们考虑建自动机。
 令$dp_{i,j}$表示后$i$个字符，当前在自动机的第$j$个位置的方案数。
-Code：1234567891011121314"/>
+Code：
+1234567891011121"/>
     
 
     <!--Author-->
@@ -32,11 +35,14 @@ Code：1234567891011121314"/>
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="题目大意：给出一个01串，每次可以把相邻的三个数进行操作，取出其平均数然后再塞回去。
+        <meta property="og:description" content="题目大意：
+给出一个01串，每次可以把相邻的三个数进行操作，取出其平均数然后再塞回去。
 有些位置01均可填，问有多少种方案使得最终可以变成1
-解题思路：我们考虑建自动机。
+解题思路：
+我们考虑建自动机。
 令$dp_{i,j}$表示后$i$个字符，当前在自动机的第$j$个位置的方案数。
-Code：1234567891011121314"/>
+Code：
+1234567891011121"/>
     
 
     <!--Open Graph Site Name-->
@@ -213,11 +219,15 @@ Code：1234567891011121314"/>
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <h2 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h2><p>给出一个01串，每次可以把相邻的三个数进行操作，取出其平均数然后再塞回去。</p>
+                <h2>题目大意：</h2>
+<p>给出一个01串，每次可以把相邻的三个数进行操作，取出其平均数然后再塞回去。</p>
 <p>有些位置01均可填，问有多少种方案使得最终可以变成1</p>
-<h2 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h2><p>我们考虑建自动机。</p>
+<h2>解题思路：</h2>
+<p>我们考虑建自动机。</p>
 <p>令$dp_{i,j}$表示后$i$个字符，当前在自动机的第$j$个位置的方案数。</p>
-<h1 id="Code："><a href="#Code：" class="headerlink" title="Code："></a>Code：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">8</span>][<span class="number">2</span>]=&#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">300100</span>][<span class="number">8</span>],n,i,j;</span><br><span class="line"><span class="keyword">char</span> S[<span class="number">300100</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,S);</span><br><span class="line">	n=<span class="built_in">strlen</span>(S);</span><br><span class="line">	f[n][<span class="number">1</span>]=f[n][<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">7</span>;j++)&#123;</span><br><span class="line">	        <span class="keyword">if</span>(S[i]!=<span class="string">'0'</span>)f[i][j]+=f[i+<span class="number">1</span>][a[j][<span class="number">1</span>]];</span><br><span class="line">	        <span class="keyword">if</span>(S[i]!=<span class="string">'1'</span>)f[i][j]+=f[i+<span class="number">1</span>][a[j][<span class="number">0</span>]];</span><br><span class="line">	        f[i][j]%=mod;				</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,f[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>Code：</h1>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">8</span>][<span class="number">2</span>]=&#123;<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">3</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">300100</span>][<span class="number">8</span>],n,i,j;</span><br><span class="line"><span class="keyword">char</span> S[<span class="number">300100</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,S);</span><br><span class="line">	n=<span class="built_in">strlen</span>(S);</span><br><span class="line">	f[n][<span class="number">1</span>]=f[n][<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">7</span>;j++)&#123;</span><br><span class="line">	        <span class="keyword">if</span>(S[i]!=<span class="string">'0'</span>)f[i][j]+=f[i+<span class="number">1</span>][a[j][<span class="number">1</span>]];</span><br><span class="line">	        <span class="keyword">if</span>(S[i]!=<span class="string">'1'</span>)f[i][j]+=f[i+<span class="number">1</span>][a[j][<span class="number">0</span>]];</span><br><span class="line">	        f[i][j]%=mod;				</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,f[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
 
                 
             </div>
