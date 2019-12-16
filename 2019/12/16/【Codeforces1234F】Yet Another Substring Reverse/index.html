@@ -14,10 +14,13 @@
 
     
         <meta name="description" content="题目大意：
-对于一个长度为$N$的$01$串，一次操作为去掉最后一个字符，并取反放到最前面
-给出一个长度为$N$的$01$串，问所有二进制数小于这个数的$01$串经过多少次操作能还原
+给出一个字符串，你可以将其中的一个子串反转。
+求反转后的字符串的最长子串，其中每种字符出现次数不超过一次。
+$|$字符集$|\leq20$
 解题思路：
-找规律可发现，对于这个串，可以将它分成奇数个节，每个节为一个任意的$01$串，并且相邻的两个$01$串分"/>
+容易发现，反转一个区间，相当于将两段字符串合并。
+所以我们只需要知道每种子集是否在字符串中出现即可。
+一个很显然的想法是枚举合并后的子集"/>
     
 
     <!--Author-->
@@ -27,16 +30,19 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="【agc039c】Division by Two with Something"/>
+        <meta property="og:title" content="【Codeforces1234F】Yet Another Substring Reverse"/>
     
 
     <!--Open Graph Description-->
     
         <meta property="og:description" content="题目大意：
-对于一个长度为$N$的$01$串，一次操作为去掉最后一个字符，并取反放到最前面
-给出一个长度为$N$的$01$串，问所有二进制数小于这个数的$01$串经过多少次操作能还原
+给出一个字符串，你可以将其中的一个子串反转。
+求反转后的字符串的最长子串，其中每种字符出现次数不超过一次。
+$|$字符集$|\leq20$
 解题思路：
-找规律可发现，对于这个串，可以将它分成奇数个节，每个节为一个任意的$01$串，并且相邻的两个$01$串分"/>
+容易发现，反转一个区间，相当于将两段字符串合并。
+所以我们只需要知道每种子集是否在字符串中出现即可。
+一个很显然的想法是枚举合并后的子集"/>
     
 
     <!--Open Graph Site Name-->
@@ -63,7 +69,7 @@
 
     <!-- Title -->
     
-    <title>【agc039c】Division by Two with Something - LoneLuyuchen</title>
+    <title>【Codeforces1234F】Yet Another Substring Reverse - LoneLuyuchen</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -173,13 +179,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>【agc039c】Division by Two with Something</h1>
+                    <h1>【Codeforces1234F】Yet Another Substring Reverse</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
                         
-                            2019-11-14
+                            2019-12-16
                         
                     </span>
                 </div>
@@ -199,7 +205,7 @@
                     
                         
 
-<a href="/categories/数论/">数论</a>
+<a href="/categories/动态规划/">动态规划</a>/ <a href="/categories/动态规划/状压/">状压</a>
 
                     
                 </div>
@@ -214,13 +220,18 @@
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <h2>题目大意：</h2>
-<p>对于一个长度为$N$的$01$串，一次操作为去掉最后一个字符，并取反放到最前面</p>
-<p>给出一个长度为$N$的$01$串，问所有二进制数小于这个数的$01$串经过多少次操作能还原</p>
+<p>给出一个字符串，你可以将其中的一个子串反转。</p>
+<p>求反转后的字符串的最长子串，其中每种字符出现次数不超过一次。</p>
+<p>$|$字符集$|\leq20$</p>
 <h2>解题思路：</h2>
-<p>找规律可发现，对于这个串，可以将它分成奇数个节，每个节为一个任意的$01$串，并且相邻的两个$01$串分别互相相反。这样的答案为$2len$($len$为每个节的长度)。</p>
-<p>枚举这样的节的个数，并判断有多少个满足要求。</p>
-<h1>Code：</h1>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 998244353</span></span><br><span class="line"><span class="keyword">int</span> n,ans,a[<span class="number">300100</span>],p[<span class="number">300100</span>],cnt,sum[<span class="number">300100</span>];</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">300100</span>];</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,s);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		a[i]=s[i]-<span class="string">'0'</span>;</span><br><span class="line">	p[++cnt]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;=n;i+=<span class="number">2</span>)</span><br><span class="line">		<span class="keyword">if</span>(n%i==<span class="number">0</span>)p[++cnt]=i;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=cnt;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">int</span> len=n/p[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;len;j++)</span><br><span class="line">			sum[i]=(sum[i]*<span class="number">2</span>+a[j])%mod;</span><br><span class="line">		sum[i]++;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">			<span class="keyword">if</span>(((a[j%len])^(j/len&amp;<span class="number">1</span>))&lt;a[j])<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(((a[j%len])^(j/len&amp;<span class="number">1</span>))&gt;a[j])&#123;</span><br><span class="line">					--sum[i];</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=cnt;j++)</span><br><span class="line">			<span class="keyword">if</span>(p[j]%p[i]==<span class="number">0</span>)(sum[i]-=sum[j]-mod)%=mod;</span><br><span class="line">		(ans+=sum[i]*n/p[i]*<span class="number">2</span>%mod)%=mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans%mod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>容易发现，反转一个区间，相当于将两段字符串合并。</p>
+<p>所以我们只需要知道每种子集是否在字符串中出现即可。</p>
+<p>一个很显然的想法是枚举合并后的子集，再枚举其中一段子集，然后看是否此集和补集都存在。</p>
+<p>显然会$TLE$</p>
+<p>换一个想法，我们只需要求出每个集合中存在的最长的子集即可。</p>
+<p>然后就做完了。</p>
+<h1>Code:</h1>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::max;</span><br><span class="line"><span class="keyword">char</span> S[<span class="number">1001000</span>];</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">2000100</span>],n,ans;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,S+<span class="number">1</span>);</span><br><span class="line">	n=<span class="built_in">strlen</span>(S+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> s=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">20</span>&amp;&amp;i+j<span class="number">-1</span>&lt;=n;j++)&#123;</span><br><span class="line">			<span class="keyword">int</span> x=S[i+j<span class="number">-1</span>]-<span class="string">'a'</span>;</span><br><span class="line">			<span class="keyword">if</span>(s&amp;(<span class="number">1</span>&lt;&lt;x))<span class="keyword">break</span>;</span><br><span class="line">			s|=(<span class="number">1</span>&lt;&lt;x);</span><br><span class="line">			dp[s]=j;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;<span class="number">20</span>);i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">20</span>;j++)</span><br><span class="line">			<span class="keyword">if</span>(i&amp;(<span class="number">1</span>&lt;&lt;j))dp[i]=max(dp[i],dp[i^(<span class="number">1</span>&lt;&lt;j)]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;<span class="number">20</span>);i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> s=i,t=((<span class="number">1</span>&lt;&lt;<span class="number">20</span>)<span class="number">-1</span>)-s;</span><br><span class="line">		ans=max(ans,dp[s]+dp[t]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
 
                 

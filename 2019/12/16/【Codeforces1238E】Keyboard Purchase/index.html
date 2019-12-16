@@ -14,10 +14,14 @@
 
     
         <meta name="description" content="题目大意：
-对于一个长度为$N$的$01$串，一次操作为去掉最后一个字符，并取反放到最前面
-给出一个长度为$N$的$01$串，问所有二进制数小于这个数的$01$串经过多少次操作能还原
+现在有一篇长度为$n$的文章，字符集大小为$m$.
+你需要选择一台打字机，打完这篇文章。
+每台打字机为一个$m$的排列。
+每次移动一个距离需要一个代价。问代价和最小值。
+$m\leq20$
 解题思路：
-找规律可发现，对于这个串，可以将它分成奇数个节，每个节为一个任意的$01$串，并且相邻的两个$01$串分"/>
+看到$m$的范围一眼状压$DP$题
+我们先用$cnt_{i,j}$表示字符$i,j$相"/>
     
 
     <!--Author-->
@@ -27,16 +31,20 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="【agc039c】Division by Two with Something"/>
+        <meta property="og:title" content="【Codeforces1238E】Keyboard Purchase"/>
     
 
     <!--Open Graph Description-->
     
         <meta property="og:description" content="题目大意：
-对于一个长度为$N$的$01$串，一次操作为去掉最后一个字符，并取反放到最前面
-给出一个长度为$N$的$01$串，问所有二进制数小于这个数的$01$串经过多少次操作能还原
+现在有一篇长度为$n$的文章，字符集大小为$m$.
+你需要选择一台打字机，打完这篇文章。
+每台打字机为一个$m$的排列。
+每次移动一个距离需要一个代价。问代价和最小值。
+$m\leq20$
 解题思路：
-找规律可发现，对于这个串，可以将它分成奇数个节，每个节为一个任意的$01$串，并且相邻的两个$01$串分"/>
+看到$m$的范围一眼状压$DP$题
+我们先用$cnt_{i,j}$表示字符$i,j$相"/>
     
 
     <!--Open Graph Site Name-->
@@ -63,7 +71,7 @@
 
     <!-- Title -->
     
-    <title>【agc039c】Division by Two with Something - LoneLuyuchen</title>
+    <title>【Codeforces1238E】Keyboard Purchase - LoneLuyuchen</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -173,13 +181,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>【agc039c】Division by Two with Something</h1>
+                    <h1>【Codeforces1238E】Keyboard Purchase</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
                         
-                            2019-11-14
+                            2019-12-16
                         
                     </span>
                 </div>
@@ -199,7 +207,7 @@
                     
                         
 
-<a href="/categories/数论/">数论</a>
+<a href="/categories/动态规划/">动态规划</a>/ <a href="/categories/动态规划/状压/">状压</a>
 
                     
                 </div>
@@ -214,13 +222,22 @@
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <h2>题目大意：</h2>
-<p>对于一个长度为$N$的$01$串，一次操作为去掉最后一个字符，并取反放到最前面</p>
-<p>给出一个长度为$N$的$01$串，问所有二进制数小于这个数的$01$串经过多少次操作能还原</p>
+<p>现在有一篇长度为$n$的文章，字符集大小为$m$.</p>
+<p>你需要选择一台打字机，打完这篇文章。</p>
+<p>每台打字机为一个$m$的排列。</p>
+<p>每次移动一个距离需要一个代价。问代价和最小值。</p>
+<p>$m\leq20$</p>
 <h2>解题思路：</h2>
-<p>找规律可发现，对于这个串，可以将它分成奇数个节，每个节为一个任意的$01$串，并且相邻的两个$01$串分别互相相反。这样的答案为$2len$($len$为每个节的长度)。</p>
-<p>枚举这样的节的个数，并判断有多少个满足要求。</p>
-<h1>Code：</h1>
-<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 998244353</span></span><br><span class="line"><span class="keyword">int</span> n,ans,a[<span class="number">300100</span>],p[<span class="number">300100</span>],cnt,sum[<span class="number">300100</span>];</span><br><span class="line"><span class="keyword">char</span> s[<span class="number">300100</span>];</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;n);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>,s);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">		a[i]=s[i]-<span class="string">'0'</span>;</span><br><span class="line">	p[++cnt]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>;i&lt;=n;i+=<span class="number">2</span>)</span><br><span class="line">		<span class="keyword">if</span>(n%i==<span class="number">0</span>)p[++cnt]=i;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=cnt;i&gt;=<span class="number">1</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">int</span> len=n/p[i];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;len;j++)</span><br><span class="line">			sum[i]=(sum[i]*<span class="number">2</span>+a[j])%mod;</span><br><span class="line">		sum[i]++;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n;j++)</span><br><span class="line">			<span class="keyword">if</span>(((a[j%len])^(j/len&amp;<span class="number">1</span>))&lt;a[j])<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(((a[j%len])^(j/len&amp;<span class="number">1</span>))&gt;a[j])&#123;</span><br><span class="line">					--sum[i];</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=cnt;j++)</span><br><span class="line">			<span class="keyword">if</span>(p[j]%p[i]==<span class="number">0</span>)(sum[i]-=sum[j]-mod)%=mod;</span><br><span class="line">		(ans+=sum[i]*n/p[i]*<span class="number">2</span>%mod)%=mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,ans%mod);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>看到$m$的范围一眼状压$DP$题</p>
+<p>我们先用$cnt_{i,j}$表示字符$i,j$相邻的个数。特别地，$cnt_{i,i}=0$</p>
+<p>我们用$dp_S$表示当前已经搞出了一个$S$中字符集合的排列，与这$|S|$个元素的和的最小代价为多少。</p>
+<p>现在我们要枚举$i\notin S$来放在这个排列后面。</p>
+<p>对于元素$j\in S$，$i$放在后面的代价为$cnt_{i,j}\times pos_i$</p>
+<p>否则代价为$-cnt_{i,j}\times pos_i$</p>
+<p>状压$DP$即可。</p>
+<p>最终答案为$dp_{2^m-1}$</p>
+<h1>Code:</h1>
+<p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="built_in">std</span>::min;</span><br><span class="line"><span class="keyword">int</span> n,m,cnt[<span class="number">30</span>][<span class="number">30</span>],dp[<span class="number">3001000</span>];</span><br><span class="line"><span class="keyword">char</span> S[<span class="number">200100</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d%s"</span>,&amp;n,&amp;m,S+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">		cnt[S[i]-<span class="string">'a'</span>][S[i+<span class="number">1</span>]-<span class="string">'a'</span>]++;</span><br><span class="line">		cnt[S[i+<span class="number">1</span>]-<span class="string">'a'</span>][S[i]-<span class="string">'a'</span>]++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m;i++)</span><br><span class="line">		cnt[i][i]=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(dp,<span class="number">0x3f</span>,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">	dp[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;m)<span class="number">-1</span>;i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> tot=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++)</span><br><span class="line">			<span class="keyword">if</span>(i&amp;(<span class="number">1</span>&lt;&lt;j))tot++;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;m;j++)&#123;</span><br><span class="line">			<span class="keyword">if</span>(i&amp;(<span class="number">1</span>&lt;&lt;j))<span class="keyword">continue</span>;</span><br><span class="line">			<span class="keyword">int</span> sum=<span class="number">0</span>;</span><br><span class="line">	        <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;m;k++)</span><br><span class="line">	            <span class="keyword">if</span>((<span class="number">1</span>&lt;&lt;k)&amp;i)sum+=cnt[j][k]*tot;</span><br><span class="line">	            <span class="keyword">else</span> sum-=cnt[j][k]*tot;</span><br><span class="line">	        dp[i|(<span class="number">1</span>&lt;&lt;j)]=min(dp[i|(<span class="number">1</span>&lt;&lt;j)],dp[i]+sum);			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>,dp[(<span class="number">1</span>&lt;&lt;m)<span class="number">-1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
 
                 
